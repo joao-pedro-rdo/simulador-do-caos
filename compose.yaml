@@ -1,0 +1,13 @@
+services:
+  web:
+    image: kubedevio/simulador-do-caos:v1
+    #image: joaoprdo/simulador-do-caos:v2  # Com healthcheck imbutido na imagem
+    ports:
+      - "8080:3000"
+    restart: always
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
